@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"runtime/debug"
 	"strings"
 	"time"
 )
@@ -111,6 +112,7 @@ func loadAPI2(id string) ViewData {
 
 	jsonErr := json.Unmarshal(body, &vd)
 	if jsonErr != nil {
+		debug.PrintStack()
 		log.Fatal(jsonErr)
 	}
 
@@ -120,18 +122,25 @@ func loadAPI2(id string) ViewData {
 func main() {
 	viewData := Bloup{Res: loadAPI()}
 	//viewData := loadAPI()
-	tmplpage1 := template.Must(template.ParseFiles("page/page1.html"))
-	tmplpage2 := template.Must(template.ParseFiles("page/Movie.html"))
+	tmplpage := template.Must(template.ParseFiles("page/page1.html"))
+	tmplpage1 := template.Must(template.ParseFiles("page/movies.html"))
+	tmplpage2 := template.Must(template.ParseFiles("page/descrmovie.html"))
+
+	fs := http.FileServer(http.Dir("./style"))
+	http.Handle("/style/", http.StripPrefix("/style/", fs))
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		tmplpage.Execute(w, viewData)
+	})
+
+	http.HandleFunc("/movies", func(w http.ResponseWriter, r *http.Request) {
 		tmplpage1.Execute(w, viewData)
 	})
 
-	http.HandleFunc("/movie/", func(w http.ResponseWriter, r *http.Request) {
-		id := strings.ReplaceAll(r.URL.Path, "/movie/", "")
+	http.HandleFunc("/descrmovie/", func(w http.ResponseWriter, r *http.Request) {
+		id := strings.ReplaceAll(r.URL.Path, "/descrmovie/", "")
 		viewData1 := loadAPI2(id)
 		tmplpage2.Execute(w, viewData1)
-		fmt.Println(viewData1)
 	})
 
 	fmt.Println("Starting server on port 80")
