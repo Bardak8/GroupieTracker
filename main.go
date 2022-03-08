@@ -74,7 +74,7 @@ func loadAPI() ViewData {
 func main() {
 	viewData := loadAPI()
 	tmplpage1 := template.Must(template.ParseFiles("page/page1.html"))
-	http.HandleFunc("/game", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/page1", func(w http.ResponseWriter, r *http.Request) {
 		tmplpage1.Execute(w, viewData)
 	})
 	fmt.Println("Starting server on port 80")
@@ -88,7 +88,7 @@ func homePage(w http.ResponseWriter, r *http.Request) {
 
 func handleRequests() {
 	http.HandleFunc("/", homePage)
-	log.Fatal(http.ListenAndServe(":8001", nil))
+	log.Fatal(http.ListenAndServe(":80", nil))
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
