@@ -7,10 +7,15 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"strings"
 	"time"
 )
 
-type ViewData []struct {
+type Bloup struct {
+	Res []ViewData
+}
+
+type ViewData struct {
 	ID                     string   `json:"id"`
 	Title                  string   `json:"title"`
 	OriginalTitle          string   `json:"original_title"`
@@ -30,10 +35,51 @@ type ViewData []struct {
 	URL                    string   `json:"url"`
 }
 
-func loadAPI() ViewData {
+func loadAPI() []ViewData {
+	var vd []ViewData
+
+	url := "https://ghibliapi.herokuapp.com/films/"
+
+	httpClient := http.Client{
+		Timeout: time.Second * 2, // define timeout
+	}
+
+	//create request
+	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	req.Header.Set("User-Agent", "API AT test <3")
+
+	//make api call
+	res, getErr := httpClient.Do(req)
+	if getErr != nil {
+		log.Fatal(getErr)
+	}
+
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
+
+	//parse response
+	body, readErr := ioutil.ReadAll(res.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
+
+	jsonErr := json.Unmarshal(body, &vd)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
+
+	return vd
+}
+
+func loadAPI2(id string) ViewData {
 	var vd ViewData
 
-	url := "https://ghibliapi.herokuapp.com/films"
+	url := "https://ghibliapi.herokuapp.com/films/" + id
 
 	httpClient := http.Client{
 		Timeout: time.Second * 2, // define timeout
@@ -72,13 +118,24 @@ func loadAPI() ViewData {
 }
 
 func main() {
-	viewData := loadAPI()
+	viewData := Bloup{Res: loadAPI()}
+	//viewData := loadAPI()
 	tmplpage1 := template.Must(template.ParseFiles("page/page1.html"))
-	http.HandleFunc("/game", func(w http.ResponseWriter, r *http.Request) {
+	tmplpage2 := template.Must(template.ParseFiles("page/Movie.html"))
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tmplpage1.Execute(w, viewData)
 	})
+
+	http.HandleFunc("/movie/", func(w http.ResponseWriter, r *http.Request) {
+		id := strings.ReplaceAll(r.URL.Path, "/movie/", "")
+		viewData1 := loadAPI2(id)
+		tmplpage2.Execute(w, viewData1)
+		fmt.Println(viewData1)
+	})
+
 	fmt.Println("Starting server on port 80")
-	http.ListenAndServe(":80", nil)
+	http.ListenAndServe(":8000", nil)
 }
 
 func homePage(w http.ResponseWriter, r *http.Request) {
