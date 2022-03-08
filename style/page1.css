@@ -1,0 +1,124 @@
+html {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-image: url("../style/img/background1.jpg");
+    background-repeat: no-repeat;
+}
+@font-face {
+    font-family: "brandonbold";
+    src: url("brandon/Brandontext-Bold.otf");
+}
+
+@font-face {
+    font-family: "brandonregular";
+    src: url("brandon/BrandonText-Regular.otf");
+}
+
+@font-face {
+    font-family: "brandonThin";
+    src: url("brandon/BrandonText-Thin.otf");
+}
+
+body {
+    font-family: "brandonbold";
+}
+
+.header {
+    display: flex;
+    position: fixed;
+    background-color: black;
+    color: white;
+    height: 25%;
+    width: 100%
+}
+
+.title {
+    align-self: center;
+}
+
+.categorie {
+    float: right;
+    color: aqua;
+    position: absolute;
+    right: 6%;
+    align-self: center;
+    font-family: "brandonregular";
+}
+
+.title {
+    margin: 5% 5%;
+}
+h1 {
+    margin: 0;
+    text-shadow: 0 0 1px #ffeab3, 0 0 10px #fff, 0 0 10px #000;
+}
+h2 {
+    font-size: 15px;
+    margin: 0;
+    color: pink;
+}
+
+.imgheader {
+    width: 35%;
+    position: sticky;
+    margin-left: 12%;
+    margin-top: 0px;
+}
+
+div.header {
+    top: 0;
+}
+.text {
+    margin: 22% 20%;
+    text-align: center;
+    font-family: brandonThin;
+    font-size: 22px;
+}
+
+a.film:after {
+    width: 15%;
+    left: 7px;
+}
+
+a.perso:after{
+    width: 38%;
+    left: 72px;
+}
+
+a.real:after {
+    width: 36%;
+    left: 210px;
+}
+a:after{
+    content: '';
+    position: absolute;
+    transform: scaleX(0);
+    height: 1px;
+    bottom: 0;
+    background-color: white;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+ a:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+a {
+    color: white;
+    margin: 10px 10px;
+    transition: all .4s;
+    text-decoration: none;
+}
+
+a:hover {
+    cursor: pointer;
+    text-shadow: 0 0 1px #ffeab3, 0 0 10px #fff, 0 0 10px #000;
+}
