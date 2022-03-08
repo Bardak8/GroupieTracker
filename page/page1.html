@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="../style/page1.css">
 </head>
 <body>
+    {{range .Res}}
+        <a href="movie/{{.ID}}">{{.Title}} </a>
+    {{end}}
     <div class="container">
         <div class="header">
             <div class="title">
@@ -24,6 +27,6 @@
         </div>
     </div>
     </div>
-
+>>>>>>> 087e2596efe78e3553491d4162274ab1f984df12
 </body>
 </html>
