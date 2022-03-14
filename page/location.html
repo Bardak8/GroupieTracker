@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>API Laurie Maxime GHIBLI</title>
     <link rel="stylesheet" href="/style/page1.css">
+    <link rel="stylesheet" href="/style/films.css">
 </head>
 <body>
 <div class="container">
@@ -18,11 +19,14 @@
             <a class="perso" href="/people" >PERSONNAGES</a>
             <a class="real" href="/location">LOCATION</a>
         </div>
-        {{range .Res1}}
-        <a href="descrpeople/{{.ID}}">{{.Name}} </a>
-        {{end}}
+
     </div>
 </div>
+</div>
+<div class="listfilms">
+    {{range .Res2}}
+    <div><a href="descrlocation/{{.ID}}"> <p class="titrefilms">{{.Name}}</p> <img class="affichefilms"> </a></div>
+    {{end}}
 </div>
 </body>
 </html>
