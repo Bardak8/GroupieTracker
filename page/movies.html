@@ -26,7 +26,8 @@
         </div>
         <div class="listfilms">
             {{range .Res}}
-            <div><a href="descrmovie/{{.ID}}"> <p class="titrefilms">{{.Title}}</p> <img class="affichefilms" src="{{.Image}}"> </a></div>
+            <div class="titrefilms"><a href="descrmovie/{{.ID}}"> {{.Title}}<img class="affichefilms" src="{{.Image}}"></a></div>
+
             {{end}}
         </div>
 </body>

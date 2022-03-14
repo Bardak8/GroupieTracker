@@ -118,6 +118,7 @@ a {
     color: white;
     margin: 10px 10px;
     transition: all .4s;
+    margin-bottom: 20px;
 }
 
 a:hover {
@@ -128,12 +129,15 @@ a:hover {
 .listfilms {
 
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(5, 2fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
     margin-top: 13%;
+    text-align: center;
 }
 
 img.affichefilms {
     width: 220px
 }
+
+
