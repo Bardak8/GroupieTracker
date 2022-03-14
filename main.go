@@ -16,6 +16,23 @@ type Bloup struct {
 	Res []ViewData
 }
 
+type Bloup1 struct {
+	Res1 []Viewpeople
+}
+
+type Viewpeople struct {
+	ID        string   `json:"id"`
+	Name      string   `json:"name"`
+	Gender    string   `json:"gender,omitempty"`
+	Age       string   `json:"age"`
+	EyeColor  string   `json:"eye_color"`
+	HairColor string   `json:"hair_color"`
+	Films     []string `json:"films"`
+	Species   string   `json:"species"`
+	URL       string   `json:"url"`
+	Gander    string   `json:"gander,omitempty"`
+}
+
 type ViewData struct {
 	ID                     string   `json:"id"`
 	Title                  string   `json:"title"`
@@ -119,18 +136,108 @@ func loadAPI2(id string) ViewData {
 	return vd
 }
 
+func loadAPIpeople() []Viewpeople {
+	var vd []Viewpeople
+
+	url := "https://ghibliapi.herokuapp.com/people/"
+
+	httpClient := http.Client{
+		Timeout: time.Second * 2, // define timeout
+	}
+
+	//create request
+	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	req.Header.Set("User-Agent", "API AT test <3")
+
+	//make api call
+	res, getErr := httpClient.Do(req)
+	if getErr != nil {
+		log.Fatal(getErr)
+	}
+
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
+
+	//parse response
+	body, readErr := ioutil.ReadAll(res.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
+
+	jsonErr := json.Unmarshal(body, &vd)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
+
+	return vd
+}
+
+func loadAPIpeople1(id string) Viewpeople {
+	var vd Viewpeople
+
+	url := "https://ghibliapi.herokuapp.com/people/" + id
+
+	httpClient := http.Client{
+		Timeout: time.Second * 2, // define timeout
+	}
+
+	//create request
+	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	req.Header.Set("User-Agent", "API AT test <3")
+
+	//make api call
+	res, getErr := httpClient.Do(req)
+	if getErr != nil {
+		log.Fatal(getErr)
+	}
+
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
+
+	//parse response
+	body, readErr := ioutil.ReadAll(res.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
+
+	jsonErr := json.Unmarshal(body, &vd)
+	if jsonErr != nil {
+		debug.PrintStack()
+		log.Fatal(jsonErr)
+	}
+
+	return vd
+}
+
 func main() {
 	viewData := Bloup{Res: loadAPI()}
+	viewDatapers := Bloup1{Res1: loadAPIpeople()}
 	//viewData := loadAPI()
 	tmplpage := template.Must(template.ParseFiles("page/page1.html"))
 	tmplpage1 := template.Must(template.ParseFiles("page/movies.html"))
 	tmplpage2 := template.Must(template.ParseFiles("page/descrmovie.html"))
+	tmplpage4 := template.Must(template.ParseFiles("page/people.html"))
+	tmplpage3 := template.Must(template.ParseFiles("page/descrpeople.html"))
 
 	fs := http.FileServer(http.Dir("./style"))
 	http.Handle("/style/", http.StripPrefix("/style/", fs))
 
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		tmplpage.Execute(w, viewData)
+	})
+
+	http.HandleFunc("/people", func(w http.ResponseWriter, r *http.Request) {
+		tmplpage4.Execute(w, viewDatapers)
 	})
 
 	http.HandleFunc("/movies", func(w http.ResponseWriter, r *http.Request) {
@@ -141,6 +248,12 @@ func main() {
 		id := strings.ReplaceAll(r.URL.Path, "/descrmovie/", "")
 		viewData1 := loadAPI2(id)
 		tmplpage2.Execute(w, viewData1)
+	})
+
+	http.HandleFunc("/descrpeople/", func(w http.ResponseWriter, r *http.Request) {
+		id := strings.ReplaceAll(r.URL.Path, "/descrpeople/", "")
+		viewDatapers1 := loadAPIpeople1(id)
+		tmplpage3.Execute(w, viewDatapers1)
 	})
 
 	fmt.Println("Starting server on port 80")

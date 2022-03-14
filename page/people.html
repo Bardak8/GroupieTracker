@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/style/page1.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <div class="title">
+            <h1>GHIBLI COLLECTION.</h1>
+            <h2>Par Laurie et Maxime</h2>
+        </div>
+        <div><a href="/"><img class="imgheader" src="/style/img/headerimg.png"></a></div>
+        <div class="categorie">
+            <a class="film" href="/movies">FILMS</a>
+            <a class="perso" href="/people" >PERSONNAGES</a>
+            <a class="real">RÉALISATEURS</a>
+        </div>
+        {{range .Res1}}
+        <a href="descrpeople/{{.ID}}">{{.Name}} </a>
+        {{end}}
+    </div>
+</div>
+</div>
+</body>
+</html>
