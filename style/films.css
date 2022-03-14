@@ -1,14 +1,16 @@
 html {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: auto;
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    margin: 60px;
+    padding: 60px;
     background-image: url("../style/img/background1.jpg");
-    background-repeat: no-repeat;
+    background-repeat: repeat;
+    font-family: "brandonbold";
+
 }
 @font-face {
     font-family: "brandonbold";
@@ -25,17 +27,14 @@ body {
     src: url("brandon/BrandonText-Thin.otf");
 }
 
-body {
-    font-family: "brandonbold";
-}
-
 .header {
     display: flex;
     position: fixed;
     background-color: black;
     color: white;
     height: 25%;
-    width: 100%
+    width: 100%;
+    left:0
 }
 
 .title {
@@ -53,6 +52,10 @@ body {
 
 .title {
     margin: 5% 5%;
+}
+
+div.p {
+    text-align: center;
 }
 h1 {
     margin: 0;
@@ -120,4 +123,17 @@ a {
 a:hover {
     cursor: pointer;
     text-shadow: 0 0 1px #ffeab3, 0 0 10px #fff, 0 0 10px #000;
+}
+
+.listfilms {
+
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    margin-top: 13%;
+}
+
+img.affichefilms {
+    width: 220px
 }

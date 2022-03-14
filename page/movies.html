@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>API Laurie Maxime GHIBLI</title>
     <link rel="stylesheet" href="/style/page1.css">
+    <link rel="stylesheet" href="/style/films.css">
 </head>
 <body>
     <div class="container">
@@ -17,12 +18,16 @@
                     <a class="film" href="">FILMS</a>
                     <a class="perso">PERSONNAGES</a>
                     <a class="real">RÉALISATEURS</a>
+                    error
                 </div>
-                {{range .Res}}
-                    <a href="descrmovie/{{.ID}}">{{.Title}} </a>
-                {{end}}
+
+            </div>
             </div>
         </div>
-    </div>
+        <div class="listfilms">
+            {{range .Res}}
+            <div><a href="descrmovie/{{.ID}}"> <p class="titrefilms">{{.Title}}</p> <img class="affichefilms" src="{{.Image}}"> </a></div>
+            {{end}}
+        </div>
 </body>
 </html>
