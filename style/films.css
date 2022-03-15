@@ -126,13 +126,11 @@ a:hover {
     text-shadow: 0 0 1px #ffeab3, 0 0 10px #fff, 0 0 10px #000;
 }
 
-.listfilms {
-
+.descrmovie {
     display: grid;
-    grid-template-columns: repeat(5, 2fr);
+    grid-template-columns: repeat(5, 1fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
-    margin-top: 13%;
     text-align: center;
 }
 
