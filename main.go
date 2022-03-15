@@ -1,516 +1,18 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"log"
 	"net/http"
-	"runtime/debug"
 	"strings"
-	"time"
 )
 
-type Film struct {
-	Res []ViewData
-}
-
-type People struct {
-	Res1 []Viewpeople
-}
-
-type Location struct {
-	Res2 []ViewLocation
-}
-
-type Species struct {
-	Res3 []ViewSpecies
-}
-
-type Vehicles struct {
-	Res4 []ViewVehicles
-}
-
-type ViewSpecies struct {
-	ID             string   `json:"id"`
-	Name           string   `json:"name"`
-	Classification string   `json:"classification"`
-	EyeColors      string   `json:"eye_colors"`
-	HairColors     string   `json:"hair_colors"`
-	People         []string `json:"people"`
-	Films          []string `json:"films"`
-	URL            string   `json:"url"`
-}
-
-type Viewpeople struct {
-	ID        string   `json:"id"`
-	Name      string   `json:"name"`
-	Gender    string   `json:"gender,omitempty"`
-	Age       string   `json:"age"`
-	EyeColor  string   `json:"eye_color"`
-	HairColor string   `json:"hair_color"`
-	Films     []string `json:"films"`
-	Species   string   `json:"species"`
-	URL       string   `json:"url"`
-	Gander    string   `json:"gander,omitempty"`
-}
-
-type ViewData struct {
-	ID                     string   `json:"id"`
-	Title                  string   `json:"title"`
-	OriginalTitle          string   `json:"original_title"`
-	OriginalTitleRomanised string   `json:"original_title_romanised"`
-	Image                  string   `json:"image"`
-	MovieBanner            string   `json:"movie_banner"`
-	Description            string   `json:"description"`
-	Director               string   `json:"director"`
-	Producer               string   `json:"producer"`
-	ReleaseDate            string   `json:"release_date"`
-	RunningTime            string   `json:"running_time"`
-	RtScore                string   `json:"rt_score"`
-	People                 []string `json:"people"`
-	Species                []string `json:"species"`
-	Locations              []string `json:"locations"`
-	Vehicles               []string `json:"vehicles"`
-	URL                    string   `json:"url"`
-}
-
-type ViewLocation struct {
-	ID           string   `json:"id"`
-	Name         string   `json:"name"`
-	Climate      string   `json:"climate"`
-	Terrain      string   `json:"terrain"`
-	SurfaceWater string   `json:"surface_water"`
-	Residents    []string `json:"residents"`
-	Films        []string `json:"films"`
-	URL          string   `json:"url"`
-}
-
-type ViewVehicles struct {
-	ID           string   `json:"id"`
-	Name         string   `json:"name"`
-	Description  string   `json:"description"`
-	VehicleClass string   `json:"vehicle_class"`
-	Length       string   `json:"length"`
-	Pilot        string   `json:"pilot"`
-	Films        []string `json:"films"`
-	URL          string   `json:"url"`
-}
-
-func loadAPI() []ViewData {
-	var vd []ViewData
-
-	url := "https://ghibliapi.herokuapp.com/films/"
-
-	httpClient := http.Client{
-		Timeout: time.Second * 2, // define timeout
-	}
-
-	//create request
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "API AT test <3")
-
-	//make api call
-	res, getErr := httpClient.Do(req)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	//parse response
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
-
-	jsonErr := json.Unmarshal(body, &vd)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return vd
-}
-
-func loadAPI2(id string) ViewData {
-	var vd ViewData
-
-	url := "https://ghibliapi.herokuapp.com/films/" + id
-
-	httpClient := http.Client{
-		Timeout: time.Second * 2, // define timeout
-	}
-
-	//create request
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "API AT test <3")
-
-	//make api call
-	res, getErr := httpClient.Do(req)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	//parse response
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
-
-	jsonErr := json.Unmarshal(body, &vd)
-	if jsonErr != nil {
-		debug.PrintStack()
-		log.Fatal(jsonErr)
-	}
-
-	return vd
-}
-
-func loadAPIpeople() []Viewpeople {
-	var vd []Viewpeople
-
-	url := "https://ghibliapi.herokuapp.com/people/"
-
-	httpClient := http.Client{
-		Timeout: time.Second * 2, // define timeout
-	}
-
-	//create request
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "API AT test <3")
-
-	//make api call
-	res, getErr := httpClient.Do(req)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	//parse response
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
-
-	jsonErr := json.Unmarshal(body, &vd)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return vd
-}
-
-func loadAPIpeople1(id string) Viewpeople {
-	var vd Viewpeople
-
-	url := "https://ghibliapi.herokuapp.com/people/" + id
-
-	httpClient := http.Client{
-		Timeout: time.Second * 2, // define timeout
-	}
-
-	//create request
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "API AT test <3")
-
-	//make api call
-	res, getErr := httpClient.Do(req)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	//parse response
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
-
-	jsonErr := json.Unmarshal(body, &vd)
-	if jsonErr != nil {
-		debug.PrintStack()
-		log.Fatal(jsonErr)
-	}
-
-	return vd
-}
-
-func loadAPILocation1() []ViewLocation {
-	var vd []ViewLocation
-
-	url := "https://ghibliapi.herokuapp.com/locations/"
-
-	httpClient := http.Client{
-		Timeout: time.Second * 2, // define timeout
-	}
-
-	//create request
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "API AT test <3")
-
-	//make api call
-	res, getErr := httpClient.Do(req)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	//parse response
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
-
-	jsonErr := json.Unmarshal(body, &vd)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return vd
-}
-
-func loadAPILocation2(id string) ViewLocation {
-	var vd ViewLocation
-
-	url := "https://ghibliapi.herokuapp.com/locations/" + id
-
-	httpClient := http.Client{
-		Timeout: time.Second * 2, // define timeout
-	}
-
-	//create request
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "API AT test <3")
-
-	//make api call
-	res, getErr := httpClient.Do(req)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	//parse response
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
-
-	jsonErr := json.Unmarshal(body, &vd)
-	if jsonErr != nil {
-		debug.PrintStack()
-		log.Fatal(jsonErr)
-	}
-
-	return vd
-}
-
-func loadAPISpecies() []ViewSpecies {
-	var vd []ViewSpecies
-
-	url := "https://ghibliapi.herokuapp.com/species/"
-
-	httpClient := http.Client{
-		Timeout: time.Second * 2, // define timeout
-	}
-
-	//create request
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "API AT test <3")
-
-	//make api call
-	res, getErr := httpClient.Do(req)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	//parse response
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
-
-	jsonErr := json.Unmarshal(body, &vd)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return vd
-}
-
-func loadAPISpecies1(id string) ViewSpecies {
-	var vd ViewSpecies
-
-	url := "https://ghibliapi.herokuapp.com/species/" + id
-
-	httpClient := http.Client{
-		Timeout: time.Second * 2, // define timeout
-	}
-
-	//create request
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "API AT test <3")
-
-	//make api call
-	res, getErr := httpClient.Do(req)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	//parse response
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
-
-	jsonErr := json.Unmarshal(body, &vd)
-	if jsonErr != nil {
-		debug.PrintStack()
-		log.Fatal(jsonErr)
-	}
-
-	return vd
-}
-func loadAPIVehicles() []ViewVehicles {
-	var vd []ViewVehicles
-
-	url := "https://ghibliapi.herokuapp.com/vehicles/"
-
-	httpClient := http.Client{
-		Timeout: time.Second * 2, // define timeout
-	}
-
-	//create request
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "API AT test <3")
-
-	//make api call
-	res, getErr := httpClient.Do(req)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	//parse response
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
-
-	jsonErr := json.Unmarshal(body, &vd)
-	if jsonErr != nil {
-		log.Fatal(jsonErr)
-	}
-
-	return vd
-}
-
-func loadAPIVehicles1(id string) ViewVehicles {
-	var vd ViewVehicles
-
-	url := "https://ghibliapi.herokuapp.com/vehicles/" + id
-
-	httpClient := http.Client{
-		Timeout: time.Second * 2, // define timeout
-	}
-
-	//create request
-	req, err := http.NewRequest(http.MethodGet, url, nil)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	req.Header.Set("User-Agent", "API AT test <3")
-
-	//make api call
-	res, getErr := httpClient.Do(req)
-	if getErr != nil {
-		log.Fatal(getErr)
-	}
-
-	if res.Body != nil {
-		defer res.Body.Close()
-	}
-
-	//parse response
-	body, readErr := ioutil.ReadAll(res.Body)
-	if readErr != nil {
-		log.Fatal(readErr)
-	}
-
-	jsonErr := json.Unmarshal(body, &vd)
-	if jsonErr != nil {
-		debug.PrintStack()
-		log.Fatal(jsonErr)
-	}
-
-	return vd
-}
+//func items(id) {
+//	for i := 0; i < len(ViewDataLocation.Res2); i++ {
+//		Locationtemp.Films[i] == "descrmovie/"+id
+//	}
+//}
 
 func main() {
 	viewData := Film{Res: loadAPI()}
@@ -572,8 +74,26 @@ func main() {
 
 	http.HandleFunc("/descrlocation/", func(w http.ResponseWriter, r *http.Request) {
 		id := strings.ReplaceAll(r.URL.Path, "/descrlocation/", "")
-		viewDataLocation1 := loadAPILocation2(id)
-		tmpldscrlocation.Execute(w, viewDataLocation1)
+		location := loadAPILocation2(id)
+		films := Film{Res: []ViewData{}}
+
+		for _, url := range location.Films {
+			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/films/", "")
+			film := loadAPI2(id)
+			films.Res = append(films.Res, film)
+		}
+
+		type Resultat struct {
+			Location ViewLocation
+			Films    Film
+		}
+
+		res := Resultat{
+			location,
+			films,
+		}
+
+		tmpldscrlocation.Execute(w, res)
 	})
 
 	http.HandleFunc("/descrspecies/", func(w http.ResponseWriter, r *http.Request) {
@@ -584,8 +104,26 @@ func main() {
 
 	http.HandleFunc("/descrvehicles/", func(w http.ResponseWriter, r *http.Request) {
 		id := strings.ReplaceAll(r.URL.Path, "/descrvehicles/", "")
-		viewDataVehicles := loadAPIVehicles1(id)
-		tmpldscrvehicles.Execute(w, viewDataVehicles)
+		vehicles := loadAPIVehicles1(id)
+		films := Film{Res: []ViewData{}}
+
+		for _, url := range vehicles.Films {
+			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/films/", "")
+			film := loadAPI2(id)
+			films.Res = append(films.Res, film)
+		}
+
+		type Resultat struct {
+			Vehicles ViewVehicles
+			Films    Film
+		}
+
+		res := Resultat{
+			vehicles,
+			films,
+		}
+
+		tmpldscrvehicles.Execute(w, res)
 	})
 
 	fmt.Println("Starting server on port 80")
