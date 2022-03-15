@@ -5,6 +5,11 @@
     <title>Title</title>
 </head>
 <body>
-    {{.Name}}
+    {{.Vehicles.Name}}
+    {{range .Films.Res}}
+        <div>
+            <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
+        </div>
+    {{end}}
 </body>
 </html>
