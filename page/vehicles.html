@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Laurie Maxime GHIBLI</title>
+    <link rel="stylesheet" href="/style/page1.css">
+    <link rel="stylesheet" href="/style/films.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="title">
+                <h1>GHIBLI COLLECTION.</h1>
+                <h2>Par Laurie et Maxime</h2>
+            </div>
+            <div><a href="/"><img class="imgheader" src="/style/img/headerimg.png"></a></div>
+            <div class="categorie">
+                <a class="film" href="/movies">FILMS</a>
+                <a class="perso" href="/people" >PERSONNAGES</a>
+                <a class="real" href="/location">LOCATION</a>
+                <a class="" href="/species">SPECIES</a>
+                <a class="" href="/vehicles">VEHICLES</a>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <div class="listfilms">
+        {{range .Res4}}
+        <div><a href="descrvehicles/{{.ID}}"> <p class="titrefilms">{{.Name}}</p> <img class="affichefilms"> </a></div>
+        {{end}}
+    </div>
+</body>
+</html>
