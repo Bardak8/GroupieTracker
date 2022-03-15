@@ -5,8 +5,12 @@
     <title>Title</title>
 </head>
 <body>
-    {{.Gender}}
-    {{.Age}}
-    {{.Film}}
+    {{.Peoples.Gender}}
+    {{.Peoples.Age}}
+    {{range .Films.Res}}
+    <div>
+        <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
+    </div>
+    {{end}}
 </body>
 </html>
