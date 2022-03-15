@@ -5,7 +5,6 @@
     <title>API Laurie Maxime GHIBLI</title>
     <link rel="stylesheet" href="/style/page1.css">
     <link rel="stylesheet" href="/style/films.css">
-    <link rel="stylesheet" href="/style/descrmovie.css">
 </head>
 <body>
     <div class="container">
@@ -22,34 +21,14 @@
                 <a class="" href="/species">SPECIES</a>
                 <a class="" href="/vehicles">VEHICLES</a>
             </div>
+
         </div>
     </div>
-    <div class="patterns">
-        <svg width="100%" height="100%">
-            <defs>
-                <pattern id="polka-dots" x="0" y="0"                    width="100" height="100"
-                         patternUnits="userSpaceOnUse">
-                    <circle fill="#be9ddf" cx="25" cy="25" r="3"></circle>
-                </pattern>
-                <style>
-                    @import url("https://fonts.googleapis.com/css?  family=Lora:400,400i,700,700i");
-                </style>
-
-            </defs>
-
-
-
-
-            <text x="50%" y="60%"  text-anchor="middle"  >
-                {{.Title}}
-            </text>
-        </svg>
     </div>
-    <div class="chosenfilm">
-        <div class="imgfilm"><img class="imgchosen"src="{{.MovieBanner}}"></div>
-        <div class="descritpion">{{.Description}}</div>
+    <div class="listfilms">
+        {{range .Res3}}
+        <div><a href="descrspecies/{{.ID}}"> <p class="titrefilms">{{.Name}}</p> <img class="affichefilms"> </a></div>
+        {{end}}
     </div>
 </body>
 </html>
-
-
