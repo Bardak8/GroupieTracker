@@ -6,7 +6,7 @@ html {
 
 body {
     margin: 20px;
-    padding: 60px;
+    padding: 20px;
     background-image: url("../style/img/background1.jpg");
     background-repeat: repeat;
     font-family: "brandonbold";
@@ -128,9 +128,12 @@ a:hover {
 }
 
 .chosenfilm {
-    display: block;
+    grid-template-columns: repeat(2, 2fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    margin-top: 20%;
     text-align: center;
-    margin-top: 10%;
+    color: black ;
 }
 .imgchosen {
     width: 900px;
@@ -178,6 +181,8 @@ svg text {
     }
 
 }
+
+
 
 
 
