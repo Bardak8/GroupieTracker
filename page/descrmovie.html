@@ -41,13 +41,28 @@
 
 
             <text x="50%" y="60%"  text-anchor="middle"  >
-                {{.Title}}
+                {{.Films.Title}}
             </text>
         </svg>
     </div>
     <div class="chosenfilm">
-        <div class="imgfilm"><img class="imgchosen"src="{{.MovieBanner}}"></div>
-        <div class="descritpion">{{.Description}}</div>
+        <div class="imgfilm"><img class="imgchosen"src="{{.Films.MovieBanner}}"></div>
+        <div class="descritpion">{{.Films.Description}}</div>
+        {{range .People.Res1}}
+        <div>
+            <a href="/descrpeople/{{.ID}}"><p class="titrefilms">{{.Name}}</p></a>
+        </div>
+        {{end}}
+        {{range .Species.Res3}}
+        <div>
+            <a href="/descrspecies/{{.ID}}"><p class="titrefilms">{{.Name}}</p></a>
+        </div>
+        {{end}}
+        {{range .Vehicles.Res4}}
+        <div>
+            <a href="/descrvehicles/{{.ID}}"><p class="titrefilms">{{.Name}}</p></a>
+        </div>
+        {{end}}
     </div>
 </body>
 </html>

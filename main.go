@@ -62,8 +62,51 @@ func main() {
 
 	http.HandleFunc("/descrmovie/", func(w http.ResponseWriter, r *http.Request) {
 		id := strings.ReplaceAll(r.URL.Path, "/descrmovie/", "")
-		viewData1 := loadAPI2(id)
-		tmpldscrmovies.Execute(w, viewData1)
+		films := loadAPI2(id)
+		peoples := People{Res1: []Viewpeople{}}
+		species := Species{Res3: []ViewSpecies{}}
+		locations := Location{Res2: []ViewLocation{}}
+		vehicles := Vehicles{Res4: []ViewVehicles{}}
+
+		for _, url := range films.People {
+			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/people/", "")
+			people := loadAPIpeople1(id)
+			peoples.Res1 = append(peoples.Res1, people)
+		}
+
+		for _, url := range films.Species {
+			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/species/", "")
+			specie := loadAPISpecies1(id)
+			species.Res3 = append(species.Res3, specie)
+		}
+
+		for _, url := range films.Locations {
+			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/locations/", "")
+			location := loadAPILocation2(id)
+			locations.Res2 = append(locations.Res2, location)
+		}
+
+		for _, url := range films.Vehicles {
+			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/vehicles/", "")
+			vehicle := loadAPIVehicles1(id)
+			vehicles.Res4 = append(vehicles.Res4, vehicle)
+		}
+
+		type Resultat struct {
+			Films     ViewData
+			People    People
+			Species   Species
+			Locations Location
+			Vehicles  Vehicles
+		}
+		res := Resultat{
+			films,
+			peoples,
+			species,
+			locations,
+			vehicles,
+		}
+		tmpldscrmovies.Execute(w, res)
 	})
 
 	http.HandleFunc("/descrpeople/", func(w http.ResponseWriter, r *http.Request) {
@@ -115,8 +158,34 @@ func main() {
 
 	http.HandleFunc("/descrspecies/", func(w http.ResponseWriter, r *http.Request) {
 		id := strings.ReplaceAll(r.URL.Path, "/descrspecies/", "")
-		viewDataSpecies1 := loadAPISpecies1(id)
-		tmpldscrspecies.Execute(w, viewDataSpecies1)
+		species := loadAPISpecies1(id)
+		films := Film{Res: []ViewData{}}
+		peoples := People{Res1: []Viewpeople{}}
+
+		for _, url := range species.Films {
+			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/films/", "")
+			film := loadAPI2(id)
+			films.Res = append(films.Res, film)
+		}
+
+		for _, url := range species.People {
+			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/people/", "")
+			people := loadAPIpeople1(id)
+			peoples.Res1 = append(peoples.Res1, people)
+		}
+
+		type Resultat struct {
+			Species ViewSpecies
+			Films   Film
+			People  People
+		}
+
+		res := Resultat{
+			species,
+			films,
+			peoples,
+		}
+		tmpldscrspecies.Execute(w, res)
 	})
 
 	http.HandleFunc("/descrvehicles/", func(w http.ResponseWriter, r *http.Request) {
