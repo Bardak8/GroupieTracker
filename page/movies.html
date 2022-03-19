@@ -12,22 +12,20 @@
                 <h1>GHIBLI COLLECTION.</h1>
                 <h2>Par Laurie et Maxime</h2>
             </div>
-                <div><a href="/"><img class="imgheader" src="/style/img/headerimg.png"></a></div>
-                <div class="categorie">
-                    <a class="film" href="/movies">FILMS</a>
-                    <a class="perso" href="/people" >PERSONNAGES</a>
-                    <a class="real" href="/location">LOCATION</a>
-                    <a class="" href="/species">SPECIES</a>
-                    <a class="" href="/vehicles">VEHICLES</a>
-                </div>
-
-            </div>
+            <div><a href="/"><img class="imgheader" src="/style/img/headerimg.png"></a></div>
+            <div class="categorie">
+                <a class="film" href="/movies">FILMS</a>
+                <a class="perso" href="/people" >PERSONNAGES</a>
+                <a class="location" href="/location">LOCATION</a>
+                <a class="species" href="/species">SPECIES</a>
+                <a class="vehicles" href="/vehicles">VEHICLES</a>
             </div>
         </div>
         <div class="listfilms">
             {{range .Res}}
-                <div class="titrefilms"><a href="descrmovie/{{.ID}}"> {{.Title}}<img class="affichefilms" src="{{.Image}}"></a></div>
+            <div class="titrefilms"><a href="descrmovie/{{.ID}}"> {{.Title}}<img class="affichefilms" src="{{.Image}}"></a></div>
             {{end}}
         </div>
+    </div>
 </body>
 </html>

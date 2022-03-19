@@ -17,16 +17,16 @@
             <div class="categorie">
                 <a class="film" href="/movies">FILMS</a>
                 <a class="perso" href="/people" >PERSONNAGES</a>
-                <a class="real" href="/location">LOCATION</a>
-                <a class="" href="/species">SPECIES</a>
-                <a class="" href="/vehicles">VEHICLES</a>
+                <a class="location" href="/location">LOCATION</a>
+                <a class="species" href="/species">SPECIES</a>
+                <a class="vehicles" href="/vehicles">VEHICLES</a>
             </div>
         </div>
     </div>
     </div>
-    <div class="listfilms">
+    <div class="listvehicles">
         {{range .Res4}}
-        <div><a href="descrvehicles/{{.ID}}"> <p class="titrefilms">{{.Name}}</p> <img class="affichefilms"> </a></div>
+        <div><a href="descrvehicles/{{.ID}}"> <p class="vehicules">{{.Name}}</p>  </a></div>
         {{end}}
     </div>
 </body>

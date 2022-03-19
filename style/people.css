@@ -1,14 +1,16 @@
 html {
     margin: 0;
     padding: 0;
+    overflow: auto;
 }
 
 body {
-    margin: 0;
-    padding: 0;
+    margin: 60px;
+    padding: 60px;
     background-image: url("../style/img/background1.jpg");
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     font-family: "brandonbold";
+
 }
 @font-face {
     font-family: "brandonbold";
@@ -25,15 +27,15 @@ body {
     src: url("brandon/BrandonText-Thin.otf");
 }
 
-
-
 .header {
     display: flex;
     position: fixed;
     background-color: black;
     color: white;
     height: 25%;
-    width: 100%
+    width: 100%;
+    left:0;
+    z-index : 1
 }
 
 .title {
@@ -51,6 +53,10 @@ body {
 
 .title {
     margin: 5% 5%;
+}
+
+div.p {
+    text-align: center;
 }
 h1 {
     margin: 0;
@@ -112,7 +118,7 @@ a:after{
     transition: transform 0.25s ease-out;
 }
 
- a:hover:after {
+a:hover:after {
     transform: scaleX(1);
     transform-origin: bottom left;
 }
@@ -121,11 +127,24 @@ a {
     color: white;
     margin: 10px 10px;
     transition: all .4s;
-    text-decoration: none;
+    margin-bottom: 20px;
 }
 
 a:hover {
     cursor: pointer;
     text-shadow: 0 0 1px #ffeab3, 0 0 10px #fff, 0 0 10px #000;
+}
+
+div.listperso {
+    display: grid;
+    grid-template-columns: repeat(6, 2fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    margin-top: 12%;
+    text-align: center;
+    color: black ;
+    align-items: center;
+    background: black;
+    opacity: 0.4;
 }
 

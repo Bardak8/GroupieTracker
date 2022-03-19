@@ -86,18 +86,26 @@ div.header {
 }
 
 a.film:after {
-    width: 15%;
+    width: 10%;
     left: 7px;
 }
 
 a.perso:after{
-    width: 38%;
+    width: 26%;
     left: 72px;
 }
 
-a.real:after {
-    width: 36%;
+a.location:after {
+    width: 18%;
     left: 210px;
+}
+a.species:after {
+    width: 14%;
+    left: 320px;
+}
+a.vehicles:after {
+    width: 17%;
+    left: 400px;
 }
 a:after{
     content: '';
