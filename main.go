@@ -68,8 +68,25 @@ func main() {
 
 	http.HandleFunc("/descrpeople/", func(w http.ResponseWriter, r *http.Request) {
 		id := strings.ReplaceAll(r.URL.Path, "/descrpeople/", "")
-		viewDatapers1 := loadAPIpeople1(id)
-		tmpldscrpeople.Execute(w, viewDatapers1)
+		people := loadAPIpeople1(id)
+		films := Film{Res: []ViewData{}}
+
+		for _, url := range people.Films {
+			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/films/", "")
+			film := loadAPI2(id)
+			films.Res = append(films.Res, film)
+		}
+
+		type Resultat struct {
+			Peoples Viewpeople
+			Films   Film
+		}
+
+		res := Resultat{
+			people,
+			films,
+		}
+		tmpldscrpeople.Execute(w, res)
 	})
 
 	http.HandleFunc("/descrlocation/", func(w http.ResponseWriter, r *http.Request) {
