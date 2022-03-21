@@ -3,14 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/style/descrpeople.css">
 </head>
 <body>
-    {{.Peoples.Gender}}
-    {{.Peoples.Age}}
-    {{range .Films.Res}}
-    <div>
-        <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
+    <div class="container">
+        <div class="header">
+            <div class="title">
+                <h1>GHIBLI COLLECTION.</h1>
+                <h2>Par Laurie et Maxime</h2>
+            </div>
+            <div><a href="/"><img class="imgheader" src="/style/img/headerimg.png"></a>
+            </div>
+            <div class="categorie">
+                <a class="film" href="/movies">FILMS</a>
+                <a class="perso" href="/people" >PERSONNAGES</a>
+                <a class="real" href="/location">LOCATION</a>
+                <a class="" href="/species">SPECIES</a>
+                <a class="" href="/vehicles">VEHICLES</a>
+            </div>
+        </div>
+        <div class="contains">
+            <div class="Genre">
+                <p class="title1" >Genre : </p>
+                <p class="contentGO"> {{.Peoples.Gender}}</p>
+            </div>
+            <div class="Age">
+                <p class="title1" >Age : </p>
+                <p class="contentGO"> {{.Peoples.Age}}</p>
+            </div>
+            <div class="EyeColor">
+                <p class="title1" >EyeColor : </p>
+                <p class="contentGO"> {{.Peoples.EyeColor}}</p>
+            </div>
+            <div class="HairColor">
+                <p class="title1" >HairColor : </p>
+                <p class="contentGO"> {{.Peoples.HairColor}}</p>
+            </div>
+            <div class="Species">
+                <p class="title1" > Species : </p>
+                <a href="/descrspecies/{{.Species.ID}}">{{.Species.Name}}</a>
+            </div>
+        </div>
+        {{range .Films.Res}}
+        <div class="footer">
+            <h2 class="title1">Film en rapport  </h2>
+            <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
+        </div>
+        {{end}}
     </div>
-    {{end}}
 </body>
 </html>

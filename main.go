@@ -119,7 +119,7 @@ func main() {
 		id := strings.ReplaceAll(r.URL.Path, "/descrpeople/", "")
 		people := loadAPIpeople1(id)
 		films := Film{Res: []ViewData{}}
-
+		species := loadAPISpeciesFullUrl(people.Species)
 		for _, url := range people.Films {
 			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/films/", "")
 			film := loadAPI2(id)
@@ -129,11 +129,13 @@ func main() {
 		type Resultat struct {
 			Peoples Viewpeople
 			Films   Film
+			Species ViewSpecies
 		}
 
 		res := Resultat{
 			people,
 			films,
+			species,
 		}
 		tmpldscrpeople.Execute(w, res)
 	})

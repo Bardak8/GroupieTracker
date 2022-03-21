@@ -299,6 +299,45 @@ func loadAPISpecies() []ViewSpecies {
 	return vd
 }
 
+func loadAPISpeciesFullUrl(url string) ViewSpecies {
+	var vd ViewSpecies
+
+	httpClient := http.Client{
+		Timeout: time.Second * 2, // define timeout
+	}
+
+	//create request
+	req, err := http.NewRequest(http.MethodGet, url, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	req.Header.Set("User-Agent", "API AT test <3")
+
+	//make api call
+	res, getErr := httpClient.Do(req)
+	if getErr != nil {
+		log.Fatal(getErr)
+	}
+
+	if res.Body != nil {
+		defer res.Body.Close()
+	}
+
+	//parse response
+	body, readErr := ioutil.ReadAll(res.Body)
+	if readErr != nil {
+		log.Fatal(readErr)
+	}
+
+	jsonErr := json.Unmarshal(body, &vd)
+	if jsonErr != nil {
+		log.Fatal(jsonErr)
+	}
+
+	return vd
+}
+
 func loadAPISpecies1(id string) ViewSpecies {
 	var vd ViewSpecies
 

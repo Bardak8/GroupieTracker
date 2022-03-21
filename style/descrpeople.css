@@ -5,8 +5,8 @@ html {
 }
 
 body {
-    margin: 20px;
-    padding: 20px;
+    margin: 0px;
+    padding: 0px;
     background-image: url("../style/img/background1.jpg");
     background-repeat: repeat;
     font-family: "brandonbold";
@@ -28,7 +28,6 @@ body {
 
 .header {
     display: flex;
-    position: fixed;
     background-color: black;
     color: white;
     height: 25%;
@@ -52,10 +51,6 @@ body {
 
 .title {
     margin: 5% 5%;
-}
-
-div.p {
-    text-align: center;
 }
 h1 {
     margin: 0;
@@ -126,7 +121,7 @@ a {
     color: white;
     margin: 10px 10px;
     transition: all .4s;
-    margin-bottom: 20px;
+    text-decoration: none;
 }
 
 a:hover {
@@ -134,63 +129,47 @@ a:hover {
     text-shadow: 0 0 1px #ffeab3, 0 0 10px #fff, 0 0 10px #000;
 }
 
-.chosenfilm {
-    grid-template-columns: repeat(2, 2fr);
-    grid-gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
-    margin-top: 20%;
-    text-align: center;
-    color: black ;
-}
-.imgchosen {
-    width: 900px;
-    margin-top: -12%;
+.contains {
+    color: white;
+    margin-top:2vw;
+    height: 25%;
+    width: 97%;
+    margin-left:1vw
 }
 
-.titlechosen {
-    text-transform: uppercase;
-    color: black;
-    font-family: brandonbold;
-    margin-bottom: 20px;
+.footer{
+    color: white;
+    margin-top:2vw;
+    height: 25%;
+    width: 97%;
+    text-align:center;
 }
 
-
-
-
-.patterns {
-    height: 20vh;
-    margin-top: 10%;
+.container{
+    width: 100%;
+    height: 100%;
 }
 
-svg text {
-    letter-spacing: 7px;
-    stroke: #d6559e;
-    font-size: 58px;
-    font-weight: 700;
-    stroke-width: 3;
-
-    animation: textAnimate 5s infinite alternate;
-
+.Genre{
+    display:flex
+}
+.Age{
+    display:flex
+}
+.HairColor{
+    display:flex
+}
+.EyeColor{
+    display:flex
+}
+.Species{
+    display:flex
 }
 
-@keyframes textAnimate {
-    0% {
-        stroke-dasharray: 0 50%;
-        stroke-dashoffset:  20%;
-        fill:hsl(189deg 52% 56%)
-
-    }
-
-    100% {
-        stroke-dasharray: 50% 0;
-        stroke-dashoffstet: -20%;
-        fill: hsla(189, 68%, 75%,0%)
-    }
-
+.title1{
+    color:black
 }
 
-
-
-
-
-
+.contentGO{
+    margin-left:0.6vw
+}
