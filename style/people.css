@@ -140,7 +140,7 @@ div.listperso {
     grid-template-columns: repeat(6, 2fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
-    margin-top: 12%;
+    margin-top: 8%;
     text-align: center;
     color: black ;
     align-items: center;

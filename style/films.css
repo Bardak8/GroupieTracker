@@ -139,7 +139,7 @@ a:hover {
     grid-template-columns: repeat(6, 2fr);
     grid-gap: 10px;
     grid-auto-rows: minmax(100px, auto);
-    margin-top: 20%;
+    margin-top: 12%;
     text-align: center;
     color: black ;
 }
