@@ -70,26 +70,32 @@ func main() {
 
 		for _, url := range films.People {
 			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/people/", "")
-			people := loadAPIpeople1(id)
-			peoples.Res1 = append(peoples.Res1, people)
+			if id == "" {
+				peoples.Res1 = []Viewpeople{}
+			} else {
+				people := loadAPIpeople1(id)
+				peoples.Res1 = append(peoples.Res1, people)
+			}
 		}
 
 		for _, url := range films.Species {
 			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/species/", "")
-			specie := loadAPISpecies1(id)
-			species.Res3 = append(species.Res3, specie)
-		}
-
-		for _, url := range films.Locations {
-			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/locations/", "")
-			location := loadAPILocation2(id)
-			locations.Res2 = append(locations.Res2, location)
+			if id == "" {
+				species.Res3 = []ViewSpecies{}
+			} else {
+				specie := loadAPISpecies1(id)
+				species.Res3 = append(species.Res3, specie)
+			}
 		}
 
 		for _, url := range films.Vehicles {
 			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/vehicles/", "")
-			vehicle := loadAPIVehicles1(id)
-			vehicles.Res4 = append(vehicles.Res4, vehicle)
+			if id == "" {
+				vehicles.Res4 = []ViewVehicles{}
+			} else {
+				vehicle := loadAPIVehicles1(id)
+				vehicles.Res4 = append(vehicles.Res4, vehicle)
+			}
 		}
 
 		type Resultat struct {
