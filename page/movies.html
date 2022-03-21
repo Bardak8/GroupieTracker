@@ -21,7 +21,9 @@
                 <a class="vehicles" href="/vehicles">VEHICLES</a>
             </div>
         </div>
+        <h3>MOVIES'S LIST</h3>
         <div class="listfilms">
+
             {{range .Res}}
             <div class="titrefilms"><a href="descrmovie/{{.ID}}"> {{.Title}}<img class="affichefilms" src="{{.Image}}"></a></div>
             {{end}}
