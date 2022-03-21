@@ -128,6 +128,7 @@ a {
     margin: 10px 10px;
     transition: all .4s;
     margin-bottom: 20px;
+    text-decoration: none;
 }
 
 a:hover {

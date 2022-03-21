@@ -93,14 +93,17 @@ a.location:after {
     width: 18%;
     left: 210px;
 }
+
 a.species:after {
     width: 14%;
     left: 320px;
 }
+
 a.vehicles:after {
     width: 17%;
     left: 400px;
 }
+
 a:after{
     content: '';
     position: absolute;

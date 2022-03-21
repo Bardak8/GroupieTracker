@@ -128,6 +128,7 @@ a {
     margin: 10px 10px;
     transition: all .4s;
     margin-bottom: 20px;
+    text-decoration: none;
 }
 
 a:hover {
@@ -135,13 +136,9 @@ a:hover {
     text-shadow: 0 0 1px #ffeab3, 0 0 10px #fff, 0 0 10px #000;
 }
 
-.chosenfilm {
-    grid-template-columns: repeat(2, 2fr);
-    grid-gap: 10px;
-    grid-auto-rows: minmax(100px, auto);
-    margin-top: 20%;
-    text-align: center;
-    color: black ;
+div.chosenfilm {
+    display: flex;
+    margin-top: 12%;
 }
 .imgchosen {
     width: 900px;
@@ -190,8 +187,36 @@ svg text {
 
 }
 
+div.imgleft {
+    margin-left: 5%;
+    margin-top: -8%;
+}
 
+div.personnage {
+    display: grid;
+    grid-template-columns: repeat(5, 2fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+    margin-top: 8%;
+}
 
+div.vehicles {
+    display: flex;
+    width: 460px;
+}
+
+div.species {
+    display: flex;
+    width: 460px;
+}
+
+div.descritpion {
+    color: white;
+}
+
+svg {
+    margin-top : 3%;
+}
 
 
 
