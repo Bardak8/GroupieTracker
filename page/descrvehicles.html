@@ -3,13 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/style/descrpeople.css">
 </head>
 <body>
-    {{.Vehicles.Name}}
-    {{range .Films.Res}}
-        <div>
-            <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
+<div class="container">
+    <div class="header">
+        <div class="title">
+            <h1>GHIBLI COLLECTION.</h1>
+            <h2>Par Laurie et Maxime</h2>
         </div>
+        <div><a href="/"><img class="imgheader" src="/style/img/headerimg.png"></a>
+        </div>
+        <div class="categorie">
+            <a class="film" href="/movies">FILMS</a>
+            <a class="perso" href="/people" >PERSONNAGES</a>
+            <a class="real" href="/location">LOCATION</a>
+            <a class="" href="/species">SPECIES</a>
+            <a class="" href="/vehicles">VEHICLES</a>
+        </div>
+    </div>
+    <div class="contains">
+        <div class="values">
+            <p class="title1" >Nom : </p>
+            <p class="contentGO"> {{.Vehicles.Name}}</p>
+        </div>
+        <div class="values">
+            <p class="title1" >Description : </p>
+            <p class="contentGO"> {{.Vehicles.Description}}</p>
+        </div>
+        <div class="values">
+            <p class="title1" >Classe du véhicule : </p>
+            <p class="contentGO"> {{.Vehicles.VehicleClass}}</p>
+        </div>
+        <div class="values">
+            <p class="title1" >Longueur : </p>
+            <p class="contentGO"> {{.Vehicles.Length}}</p>
+        </div>
+        <div class="values">
+            <p class="title1" >Pilote : </p>
+            <a href="/descrpeople/{{.People.ID}}">{{.People.Name}} </a>
+        </div>
+    </div>
+    {{range .Films.Res}}
+    <div class="footer">
+        <h2 class="title1">Film en rapport  </h2>
+        <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
+    </div>
     {{end}}
+</div>
 </body>
 </html>

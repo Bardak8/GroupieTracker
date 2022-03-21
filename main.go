@@ -200,21 +200,21 @@ func main() {
 		id := strings.ReplaceAll(r.URL.Path, "/descrvehicles/", "")
 		vehicles := loadAPIVehicles1(id)
 		films := Film{Res: []ViewData{}}
-
+		peoples := loadAPIPeopleFullUrl(vehicles.Pilot)
 		for _, url := range vehicles.Films {
 			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/films/", "")
 			film := loadAPI2(id)
 			films.Res = append(films.Res, film)
 		}
-
 		type Resultat struct {
 			Vehicles ViewVehicles
 			Films    Film
+			People   Viewpeople
 		}
-
 		res := Resultat{
 			vehicles,
 			films,
+			peoples,
 		}
 
 		tmpldscrvehicles.Execute(w, res)

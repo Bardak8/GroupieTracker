@@ -150,21 +150,10 @@ a:hover {
     height: 100%;
 }
 
-.Genre{
+.values{
     display:flex
 }
-.Age{
-    display:flex
-}
-.HairColor{
-    display:flex
-}
-.EyeColor{
-    display:flex
-}
-.Species{
-    display:flex
-}
+
 
 .title1{
     color:black
