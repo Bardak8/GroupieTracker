@@ -41,14 +41,14 @@
         </div>
     </div>
     <div class="footer2">
-    <div class="contentLink1">
+    <div class="contentLink2">
         <h2 class="title2">Film en rapport : </h2>
         {{range .Films.Res}}
         <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
     {{end}}
     </div>
 
-    <div class="contentLink1">
+    <div class="contentLink2">
         <h2 class="title2">Personnage de cette râce : </h2>
         {{range .People.Res1}}
         <a href="/descrpeople/{{.ID}}"><p class="contentPeople">{{.Name}}</p></a>
