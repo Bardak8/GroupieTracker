@@ -3,16 +3,9 @@ package main
 import (
 	"fmt"
 	"html/template"
-	"log"
 	"net/http"
 	"strings"
 )
-
-//func items(id) {
-//	for i := 0; i < len(ViewDataLocation.Res2); i++ {
-//		Locationtemp.Films[i] == "descrmovie/"+id
-//	}
-//}
 
 func main() {
 	viewData := Film{Res: loadAPI()}
@@ -232,39 +225,3 @@ func main() {
 	fmt.Println("Starting server on port 80")
 	http.ListenAndServe(":8000", nil)
 }
-
-func homePage(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Welcome to the HomePage!")
-	fmt.Println("Endpoint Hit: homePage")
-}
-
-func handleRequests() {
-	http.HandleFunc("/", homePage)
-	log.Fatal(http.ListenAndServe(":8001", nil))
-}
-
-func handler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("content-type", "application/json")
-	w.Write([]byte(`{"message": "hello world"}`))
-}
-
-/*
-func handleghibli() {
-	var responses []Response
-	//TO DO Implement handler
-	response, err := http.Get("https://ghibliapi.herokuapp.com/films/")
-	if err != nil {
-		fmt.Print(err.Error())
-		os.Exit(1)
-	}
-
-	responseData, err := ioutil.ReadAll(response.Body)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	json.Unmarshal(responseData, &responses)
-	for i := range responses {
-		fmt.Println(responses[i].Id)
-	}
-} */
