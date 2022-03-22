@@ -144,6 +144,7 @@ func main() {
 		id := strings.ReplaceAll(r.URL.Path, "/descrlocation/", "")
 		location := loadAPILocation2(id)
 		films := Film{Res: []ViewData{}}
+		peoples := People{Res1: []Viewpeople{}}
 
 		for _, url := range location.Films {
 			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/films/", "")
@@ -151,14 +152,22 @@ func main() {
 			films.Res = append(films.Res, film)
 		}
 
+		for _, url := range location.Residents {
+			id := strings.ReplaceAll(url, "https://ghibliapi.herokuapp.com/films/", "")
+			people := loadAPIpeople1(id)
+			peoples.Res1 = append(peoples.Res1, people)
+		}
+
 		type Resultat struct {
 			Location ViewLocation
 			Films    Film
+			People   People
 		}
 
 		res := Resultat{
 			location,
 			films,
+			peoples,
 		}
 
 		tmpldscrlocation.Execute(w, res)

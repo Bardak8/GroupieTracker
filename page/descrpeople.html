@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/style/descrpeople.css">
+    <link rel="stylesheet" href="/style/descr.css">
 </head>
 <body>
     <div class="container">
@@ -41,13 +41,14 @@
             </div>
             <div class="values">
                 <p class="title1" > Species : </p>
-                <a href="/descrspecies/{{.Species.ID}}">{{.Species.Name}}</a>
+                <a class="spef"  href="/descrspecies/{{.Species.ID}}">{{.Species.Name}}</a>
             </div>
         </div>
-        {{range .Films.Res}}
+
         <div class="footer">
-            <h2 class="title1">Film en rapport  </h2>
-            <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
+            <h2 class="title4">Film en rapport : </h2>
+            {{range .Films.Res}}
+            <a href="/descrmovie/{{.ID}}"><p class="titrefilms2">{{.Title}}</p></a>
         </div>
         {{end}}
     </div>

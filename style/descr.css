@@ -139,10 +139,19 @@ a:hover {
 
 .footer{
     color: white;
-    margin-top:2vw;
+    margin-top:1vw;
     height: 25%;
     width: 97%;
-    text-align:center;
+    margin-left:1vw;
+    display:flex
+}
+
+.footer2{
+    color: white;
+    margin-top:1vw;
+    height: 25%;
+    width: 97%;
+    margin-left:1vw;
 }
 
 .container{
@@ -159,6 +168,56 @@ a:hover {
     color:black
 }
 
+.title2{
+    color:black;
+    width: 17vw;
+    padding-top: 2.2vh;
+}
+
+.title3{
+    color:black;
+    padding-top: 2.2vh;
+}
+
+.title4{
+    color:black;
+    padding-top: 2.6vh;
+}
+
 .contentGO{
     margin-left:0.6vw
+}
+
+.contentLink{
+    display:flex;
+    height: 20vh;
+    display:flex;
+}
+
+.contentLink1{
+    display:flex;
+    height: 52vh;
+    display:flex;
+}
+
+div.contentLink{
+    display: grid;
+    grid-template-columns: repeat(5, 2fr);
+    grid-gap: 6px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+div.contentLink1{
+    display: grid;
+    grid-template-columns: repeat(5, 2fr);
+    grid-gap: 6px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+.titrefilms2{
+    padding-left:0.2vw
+}
+
+.spef{
+    padding-top: 0.6vh;
 }

@@ -3,19 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/style/descr.css">
 </head>
 <body>
-    {{.Species.Name}}
-    {{range .Films.Res}}
-    <div>
+<div class="container">
+    <div class="header">
+        <div class="title">
+            <h1>GHIBLI COLLECTION.</h1>
+            <h2>Par Laurie et Maxime</h2>
+        </div>
+        <div><a href="/"><img class="imgheader" src="/style/img/headerimg.png"></a>
+        </div>
+        <div class="categorie">
+            <a class="film" href="/movies">FILMS</a>
+            <a class="perso" href="/people" >PERSONNAGES</a>
+            <a class="real" href="/location">LOCATION</a>
+            <a class="" href="/species">SPECIES</a>
+            <a class="" href="/vehicles">VEHICLES</a>
+        </div>
+    </div>
+    <div class="contains">
+        <div class="values">
+            <p class="title1" >Nom : </p>
+            <p class="contentGO"> {{.Species.Name}}</p>
+        </div>
+        <div class="values">
+            <p class="title1" >Classification : </p>
+            <p class="contentGO"> {{.Species.Classification}}</p>
+        </div>
+        <div class="values">
+            <p class="title1" >Couleur des yeux : </p>
+            <p class="contentGO"> {{.Species.EyeColors}}</p>
+        </div>
+        <div class="values">
+            <p class="title1" >Couleur des cheveux : </p>
+            <p class="contentGO"> {{.Species.HairColors}}</p>
+        </div>
+    </div>
+    <div class="footer2">
+    <div class="contentLink1">
+        <h2 class="title2">Film en rapport : </h2>
+        {{range .Films.Res}}
         <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
-    </div>
     {{end}}
-    {{range .People.Res1}}
-    <div>
-        <a href="/descrpeople/{{.ID}}"><p class="titrefilms">{{.Name}}</p></a>
     </div>
-    {{end}}
 
+    <div class="contentLink1">
+        <h2 class="title2">Personnage de cette râce : </h2>
+        {{range .People.Res1}}
+        <a href="/descrpeople/{{.ID}}"><p class="contentPeople">{{.Name}}</p></a>
+    {{end}}
+    </div>
+    </div>
+</div>
 </body>
 </html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" href="/style/descrpeople.css">
+    <link rel="stylesheet" href="/style/descr.css">
 </head>
 <body>
 <div class="container">
@@ -40,12 +40,20 @@
             <p class="contentGO"> {{.Location.SurfaceWater}}</p>
         </div>
     </div>
-    {{range .Films.Res}}
-    <div class="footer">
-        <h2 class="title1">Film en rapport  </h2>
-        <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
+    <div class="footer2">
+        <div class="contentLink">
+            <h2 class="title2">Film en rapport : </h2>
+        {{range .Films.Res}}
+            <a href="/descrmovie/{{.ID}}"><p class="titrefilms">{{.Title}}</p></a>
+        {{end}}
+        </div>
+        <div class="contentLink">
+            <h2 class="title2"> Personnage qui y réside :</h2>
+        {{range .People.Res1}}
+            <a href="/descrpeople/{{.ID}}"><p class="titrefilms">{{.Name}}</p></a>
+        {{end}}
+        </div>
     </div>
-    {{end}}
 </div>
 
 </body>
